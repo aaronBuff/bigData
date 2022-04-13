@@ -1,12 +1,11 @@
 import numpy as np
 import pandas as pd
-from flask_mysqldb import MySQL
 from flask import current_app, render_template,Flask
-from .flaskSQL import BTC,ETH,XMR
+from flaskSQL import BTC,ETH,XMR
 from collections import defaultdict
-from sqlalchemy.inspection import inspect
+from sqlalchemy import inspect
 
-app = Flask(__name__)
+app = current_app
 
 def query_to_dict(rset):
     result = defaultdict(list)
@@ -17,10 +16,13 @@ def query_to_dict(rset):
     return result
 
 def get_crypto():
-    btc=pd.DataFrame(query_to_dict(BTC.query.all()))
-    eth=pd.DataFrame(query_to_dict(ETH.query.all()))
-    xmr=pd.DataFrame(query_to_dict(XMR.query.all()))
+    btc=BTC.query.all()
+    eth=ETH.query.all()
+    xmr=XMR.query.all()
+    btc=pd.DataFrame(query_to_dict(btc))
+    eth=pd.DataFrame(query_to_dict(eth))
+    xmr=pd.DataFrame(query_to_dict(xmr))
     data=[btc,eth,xmr]
-    # print(data)
+    print(data)
     return data
 

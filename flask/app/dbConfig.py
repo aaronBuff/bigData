@@ -1,9 +1,6 @@
 from flask import Flask,render_template, request
-from flask_mysqldb import MySQL
 import requests
-import mysql.connector
-from .flaskSQL import BTC,ETH,XMR,app,db
-from flask_sqlalchemy import SQLAlchemy
+from flaskSQL import BTC,ETH,XMR,app,db
 
 app.app_context().push()
 db.create_all()

@@ -1,11 +1,11 @@
+from matplotlib.pyplot import connect
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask import Flask,render_template, request
-from flask_mysqldb import MySQL
-from sqlalchemy import create_engine,Table, Column, Integer, String, MetaData, Float
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@localhost:3306/flaskproj"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://root:@localhost:3306/flaskproj"
+
 db = SQLAlchemy(app)
 
 class BTC(db.Model):
@@ -18,8 +18,6 @@ class BTC(db.Model):
     volumeto = db.Column(db.Float())
     volumefrom = db.Column(db.Float())
     
-    if __name__ == "__main__":
-        app.run(debug=True)
 
 class ETH(db.Model):
     __tablename__ = 'eth'
@@ -31,8 +29,6 @@ class ETH(db.Model):
     volumeto = db.Column(db.Float())
     volumefrom = db.Column(db.Float())
     
-    if __name__ == "__main__":
-        app.run(debug=True)
 
 class XMR(db.Model):
     __tablename__ = 'xmr'
@@ -44,6 +40,5 @@ class XMR(db.Model):
     volumeto = db.Column(db.Float())
     volumefrom = db.Column(db.Float())
     
-    if __name__ == "__main__":
-        app.run(debug=True)
+
 
